@@ -34,13 +34,17 @@ jobs:
       run: |
           coverage run -m unittest test/test_persona.py
           coverage report -m
+  permissions:
+    contents: write
+    pull-requests: write
   automerge:
     name: Automerge
     needs: job1
     runs-on: ubuntu-latest
     steps:
       - name: automerge
-        uses: pascalgn/automerge-action@v0.16.0
+        uses: pascalgn/automerge-action@v0.15.6
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: ""
+          MERGE_LABELS: "automerge"
+          MERGE_METHOD: "squash"
